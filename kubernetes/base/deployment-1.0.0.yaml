@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-1.0.0
+spec:
+  selector:
+    matchLabels:
+      app: app
+      version: "1.0.0"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: app
+        version: "1.0.0"
+    spec:
+      containers:
+      - name: blizzard-sample
+        image: blizzard-sample:1.0.0
+        ports:
+        - containerPort: 8080

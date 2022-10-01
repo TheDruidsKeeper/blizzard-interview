@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-client
+spec:
+  selector:
+    matchLabels:
+      app: test-client
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: test-client
+    spec:
+      containers:
+      - name: blizzard-sample
+        image: curlimages/curl
+        command: ["ash"]
+        args: ["-c", 'while true; do echo -n "[$(date ''+%Y-%m-%d %H:%M:%S'')] "; curl -s -w " in %{time_total}s\n" http://app:8080/version; done;']
