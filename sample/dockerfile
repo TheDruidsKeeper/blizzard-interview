@@ -1,8 +1,12 @@
 FROM python:3.9.9-slim
+ARG VERSION=0.0.0
 WORKDIR /usr/app/src
 
 RUN pip install redis bottle gunicorn
 
 COPY ["th3-server.py", "."]
+
+# Write version to python script
+RUN sed -i "s/^__version__ = .*/__version__ = \"${VERSION}\"/" th3-server.py
 
 ENTRYPOINT [ "python3", "th3-server.py" ]
