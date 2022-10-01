@@ -70,7 +70,7 @@ kubectl -n blizzard logs --tail=0 -f deployment/test-client
 ```powershell
 kubectl -n blizzard patch service app -p '{\"spec\":{\"selector\":{\"version\":\"1.0.1\"}}}'
 ```
-_Note_: Immediately after running the above command you should ctrl-c the terminal watching the test client logs, so you can find the moment the version changed (it runs fast!)
+_Note_: Immediately after running the above command you should ctrl-c the terminal watching the test client logs, so you can find the moment the version changed (it runs fast!). Also, the above command is formatted to run in powershell - if you'd like to run from bash you'll need to remove the `\`'s.
 
 ### Cleanup
 ```powershell
