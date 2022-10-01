@@ -11,6 +11,7 @@ No ingress is required for this test, as the client is running within the cluste
 Implementation Notes:
 - Resources are created in the cluster using [kustomize](https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/) to apply the manifests found in the `kubernetes` directory.
 - The python script provided was stored unchanged in the `sample` directory and the dockerfile will override the `__VERSION__` variable while building the image.
+- The main point of this is to demonstrate the blue/green deployment model, which is achieved by using a single service and modifying the `spec.selector.version` to match the unique deployment. This allows new deployments to be created, referencing new builds and/or other modifications to the pod(s), and readiness properly probed before updating the service.
 
 Once the resources are created, you can connect a terminal to follow the logs of the test client while using another terminal to execute the upgrade patch.
 The patch will edit the service to use the other app version, and the test client logs will show a seamless migration without delay or failures.
