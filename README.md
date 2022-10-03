@@ -61,6 +61,12 @@ kubectl create namespace blizzard
 kubectl apply -k .\kubernetes\
 ```
 
+### Verify the desired state
+The following command should show you 3 running pods, and a service with the selector pointing at version `1.0.0`
+```powershell
+kubectl get pods,svc -n blizzard -o wide
+```
+
 ### Monitor the test client logs
 _Note_: You'll need to leave this terminal running while using another terminal to follow the next step
 ```powershell
@@ -73,7 +79,16 @@ kubectl -n blizzard patch service app -p '{\"spec\":{\"selector\":{\"version\":\
 ```
 _Note_: Immediately after running the above command you should ctrl-c the terminal watching the test client logs, so you can find the moment the version changed (it runs fast!). Also, the above command is formatted to run in powershell - if you'd like to run from bash you'll need to remove the `\`'s.
 
+### Verify the updated desired state
+The following command will show the service has been updated with the selector pointing at version `1.0.1`
+```powershell
+kubectl get pods,svc -n blizzard -o wide
+```
+
 ### Cleanup
 ```powershell
 minikube delete --all
 ```
+
+## Next Steps
+- Ideas?
